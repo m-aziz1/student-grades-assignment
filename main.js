@@ -51,7 +51,6 @@ function mainMenu() {
 function firstTo40() {
   // Set the grade of the first student to 40.
   outputEl.innerHTML = "First grade to 40";
-  grades[0] = 40;
 }
 
 function lastTo50() {
