@@ -7,7 +7,7 @@ let goBtnEl = document.getElementById("go");
 let menuEl = document.getElementById("menu");
 
 // Global Variable
-let grades = [60, 70, 80, 65, 90, 83];
+let grades = [60, 40, 80, 25, 90, 45];
 let maxGrade = 100; // grade values should be b/t 0 and max
 
 // Display Data
@@ -51,35 +51,48 @@ function mainMenu() {
 function firstTo40() {
   // Set the grade of the first student to 40.
   grades.splice(0, 1, 40);
-  outputEl.innerHTML = "First grade to 40";
+  listGrades();
 }
 
 function lastTo50() {
   // Set the grade of the last student to 50.
   grades.splice(grades.length - 1, 1, 50);
-  outputEl.innerHTML = "Last grade to 50";
+  listGrades();
 }
 
 function randomTo100() {
   // Set the grade of a random student to 100.
-  outputEl.innerHTML = "Random grade to 100";
+  let randIndex = Math.floor(Math.random() * grades.length);
+  grades.splice(randIndex, 1, 100);
+  listGrades();
 }
 
 function addRandomGrade() {
   // Add a random grade between 0 and 100 to the end of the array.
-  outputEl.innerHTML = "Add random grade";
-  //array.push()
+  let randValue = Math.round(Math.random() * 100);
+  grades.push(randValue);
+  listGrades();
 }
 
 function removeLastGrade() {
   // Remove the last grade.
-  outputEl.innerHTML = "Remove the last grade";
-  //array.pop()
+  if (grades.length > 1) {
+    grades.pop();
+  }
+  listGrades();
 }
 
 function countBelow50() {
   // Count how many grades are below 50.  Output the result.
   outputEl.innerHTML = "Count grades below 50";
+  var count = 0;
+  for (let i = 0; i < grades.length; i++) {
+    if (grades[i] < 50) {
+      count++;
+    }
+  }
+  listGrades();
+  outputEl.innerHTML = count;
 }
 
 function lowGradesTo50() {
@@ -111,3 +124,9 @@ function drawArray() {
 }
 
 //Change past assignment with array objects, and ${variable}
+function listGrades() {
+  outputEl.innerHTML = "";
+  for (i = 0; i < grades.length; i++) {
+    outputEl.innerHTML += grades[i] + "&nbsp";
+  }
+}
