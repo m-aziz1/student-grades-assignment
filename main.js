@@ -7,7 +7,7 @@ let goBtnEl = document.getElementById("go");
 let menuEl = document.getElementById("menu");
 
 // Global Variable
-let grades = [60, 40, 80, 25, 90, 45];
+let grades = [60, 35, 80, 25, 90, 45];
 let maxGrade = 100; // grade values should be b/t 0 and max
 
 // Display Data
@@ -92,24 +92,32 @@ function countBelow50() {
     }
   }
   listGrades();
-  outputEl.innerHTML = count;
+  outputEl.innerHTML += `<br><p>Grades below 50: ${count}</p>`;
 }
 
 function lowGradesTo50() {
   // Change all grades that are below 50 to be equal to 50.
-  outputEl.innerHTML = "Change low grades to 50";
+  for (let i = 0; i < grades.length; i++) {
+    if (grades[i] < 50) {
+      grades[i] = 50;
+    }
+  }
+  listGrades();
 }
 
 function increaseGradesBy10() {
   // Increase each grade by 10%.
-  outputEl.innerHTML = "Increase all grades by 10%";
-  //array.unshift()
+  for (i = 0; i < grades.length; i++) {
+    grades[i] >= 90 ? (grades[i] = maxGrade) : (grades[i] += 10);
+  }
+  listGrades();
 }
 
 function decreaseGradesBy10() {
-  // Decrease each grade by 10%.
-  outputEl.innerHTML = "Decrease all grades by 10%";
-  //array.unshift()
+  for (i = 0; i < grades.length; i++) {
+    grades[i] <= 10 ? (grades[i] = 0) : (grades[i] -= 10);
+  }
+  listGrades();
 }
 
 // Function to draw current state of grades array
@@ -123,10 +131,13 @@ function drawArray() {
   containerEl.innerHTML = outputStr;
 }
 
-//Change past assignment with array objects, and ${variable}
+//List Grade Values
 function listGrades() {
   outputEl.innerHTML = "";
   for (i = 0; i < grades.length; i++) {
-    outputEl.innerHTML += grades[i] + "&nbsp";
+    outputEl.innerHTML += `${grades[i]}&nbsp`;
+  }
+  if (grades.length === 30) {
+    grades.push("<br>");
   }
 }
